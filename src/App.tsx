@@ -1,15 +1,14 @@
-import React from 'react';
-import CommentListContainer from './containers/CommentListContainer';
-import PageListContainer from './containers/PageListContainer';
-import FormContainer from './containers/FormContainer';
+import MainPage from 'pages';
+import { Provider } from 'react-redux';
+import createStore from 'store/store';
 
 function App() {
+  const store = createStore();
+
   return (
-    <div>
-      <CommentListContainer />
-      <PageListContainer />
-      <FormContainer />
-    </div>
+    <Provider store={store}>
+      <MainPage />
+    </Provider>
   );
 }
 
