@@ -1,5 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store/reducers';
+import { getComments } from 'store/reducers/comments';
 import styled from 'styled-components';
+
+function CommentList() {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state: RootState) => state.comments.isLoading);
+  const error = useSelector((state: RootState) => state.comments.error);
+  const comments = useSelector((state: RootState) => state.comments.comments);
+
+  useEffect(() => {
+    dispatch(getComments());
+  }, [dispatch]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return;
+  if (!comments) return null;
+
+  return (
+    <>
+      {comments.map((comment: any) => {
+        <Comment>
+          <img src={comment.profile_url} alt="" />
+          {comment.author}
+
+          <CreatedAt>{comment.createdAt}</CreatedAt>
+
+          <Content>{comment.content}</Content>
+
+          <Button>
+            <a>수정</a>
+            <a>삭제</a>
+          </Button>
+
+          <hr />
+        </Comment>;
+      })}
+    </>
+  );
+}
+export default CommentList;
 
 const Comment = styled.div`
   padding: 7px 10px;
@@ -34,40 +75,3 @@ const Button = styled.div`
     cursor: pointer;
   }
 `;
-
-// 임시 데이터 입니다. 코드 작성시 data 부분을 지워주세요
-const data = [
-  {
-    id: 1,
-    profile_url: 'https://picsum.photos/id/1/50/50',
-    author: 'abc_1',
-    content: 'UI 테스트는 어떻게 진행하나요',
-    createdAt: '2020-05-01',
-  },
-];
-
-function CommentList() {
-  return (
-    <>
-      {data.map((comment, key) => (
-        <Comment key={key}>
-          <img src={comment.profile_url} alt="" />
-
-          {comment.author}
-
-          <CreatedAt>{comment.createdAt}</CreatedAt>
-
-          <Content>{comment.content}</Content>
-
-          <Button>
-            <a>수정</a>
-            <a>삭제</a>
-          </Button>
-
-          <hr />
-        </Comment>
-      ))}
-    </>
-  );
-}
-export default CommentList;
