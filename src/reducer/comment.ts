@@ -58,7 +58,7 @@ export const commentReducer = createSlice({
 
     addCommentSuccess: (state, action) => {
       reducerUtils.success(state.addComment);
-      state.comments.push(action.payload);
+      state.comments.unshift(action.payload);
     },
 
     addCommentFailure: (state, action) => {
@@ -67,7 +67,7 @@ export const commentReducer = createSlice({
 
     // getComments
     getComments(state) {
-      reducerUtils.loading(state.addComment);
+      reducerUtils.loading(state.getComments);
     },
 
     getCommentsSuccess: (state, action) => {
@@ -85,8 +85,9 @@ export const commentReducer = createSlice({
     },
 
     deleteCommentSucces: (state, action) => {
+      console.log(action.payload);
       reducerUtils.success(state.deleteComment);
-      state.comments = state.comments.filter((comment) => comment.id !== action.payload.id);
+      state.comments = state.comments.filter((comment) => comment.id !== action.payload);
     },
 
     deleteCommentFailure: (state, action) => {

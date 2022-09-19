@@ -7,7 +7,6 @@ class Http {
 
   /* constructor */
   constructor(baseURL: string | undefined, token?: string | undefined) {
-    this.baseURL = baseURL;
     this.axios = axios.create({
       baseURL: `${baseURL}`,
       headers: {
@@ -47,17 +46,17 @@ class Http {
   }
 
   protected async post(url: string, data: any, headerOption?: AxiosRequestHeaders | undefined) {
-    const axios = this.axiosInstance(headerOption);
+    this.axiosInstance(headerOption);
     return await this.axios.post(url, data);
   }
 
   protected async put(url: string, data: any, headerOption?: AxiosRequestHeaders | undefined) {
-    const axios = this.axiosInstance(headerOption);
+    this.axiosInstance(headerOption);
     return await this.axios.put(url, data);
   }
 
   protected async delete(url: string, data: any, headerOption?: AxiosRequestHeaders | undefined) {
-    const axios = this.axiosInstance(headerOption);
+    this.axiosInstance(headerOption);
     return await this.axios.delete(url, { data });
   }
 }

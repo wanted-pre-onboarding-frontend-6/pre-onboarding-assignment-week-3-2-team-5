@@ -18,14 +18,30 @@ import {
 import { takeLatest, all, fork, call, put } from 'redux-saga/effects';
 
 const http = new Http(process.env.REACT_APP_API_URL);
-const commentService = new CommentService(http);
+const commentServcie = new CommentService(http);
 
-// servcie
+// handler
+
+function getCommentsApi(payload: any) {
+  return commentServcie.getComments(payload);
+}
+
+function addCommentApi(payload: any) {
+  return commentServcie.createComment(payload);
+}
+
+function updateCommentApi(payload: any) {
+  return commentServcie.updateComment(payload);
+}
+
+function deleteCommentApi(payload: any) {
+  return commentServcie.deleteComment(payload);
+}
 
 // saga
 function* addCommentSaga(action: any) {
   try {
-    const response: AxiosResponse<any> = yield call(commentService.createComment, action.payload);
+    const response: AxiosResponse<any> = yield call(addCommentApi, action.payload);
     yield put(addCommentSuccess(response.data));
   } catch (err: any) {
     yield put(addCommentFailure(err));
@@ -34,28 +50,28 @@ function* addCommentSaga(action: any) {
 
 function* getCommentsSaga(action: any) {
   try {
-    const response: AxiosResponse<any> = yield call(commentService.getComments, action.payload);
+    const response: AxiosResponse<any> = yield call(getCommentsApi, action.payload);
     yield put(getCommentsSuccess(response.data));
   } catch (err: any) {
     yield put(getCommentsFailure(err));
   }
 }
 
-function* deleteCommentsSaga(action: any) {
-  try {
-    const response: AxiosResponse<any> = yield call(commentService.deleteComment, action.payload);
-    yield put(deleteCommentSucces(response.data));
-  } catch (err: any) {
-    yield put(deleteCommentFailure(err));
-  }
-}
-
 function* updateCommentsSaga(action: any) {
   try {
-    const response: AxiosResponse<any> = yield call(commentService.updateComment, action.payload);
+    const response: AxiosResponse<any> = yield call(updateCommentApi, action.payload);
     yield put(updateCommentSuccess(response.data));
   } catch (err: any) {
     yield put(updateCommentFailure(err));
+  }
+}
+
+function* deleteCommentsSaga(action: any) {
+  try {
+    yield call(deleteCommentApi, action.payload);
+    yield put(deleteCommentSucces(action.payload.commentId));
+  } catch (err: any) {
+    yield put(deleteCommentFailure(err));
   }
 }
 

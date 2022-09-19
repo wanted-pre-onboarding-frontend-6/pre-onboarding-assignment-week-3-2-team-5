@@ -1,44 +1,43 @@
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getComments } from 'reducer/comment';
+import { deleteComment } from 'reducer/comment';
 import styled from 'styled-components';
-import queryString from 'query-string';
 
-// 임시 데이터 입니다. 코드 작성시 data 부분을 지워주세요
-const data = [
-  {
-    id: 1,
-    profile_url: 'https://picsum.photos/id/1/50/50',
-    author: 'abc_1',
-    content: 'UI 테스트는 어떻게 진행하나요',
-    createdAt: '2020-05-01',
-  },
-];
-
-function CommentList() {
+function CommentList({ setEditstate, setEditMode }: any) {
+  // util
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const qs = queryString.parse(window.location.search);
-    const params = {
-      page: qs.page,
-    };
-    dispatch({ type: getComments.type, payload: { params } });
+  // cooment select
+  const { comments } = useSelector((state: any) => state.comment);
+
+  // delete
+  const onDeletHandler = useCallback((id: number) => {
+    dispatch({
+      type: deleteComment.type,
+      payload: { commentId: id },
+    });
   }, []);
 
+  // render
   return (
     <>
-      {data.map((comment, key) => (
+      {comments.map((comment: any, key: number) => (
         <Comment key={key}>
           <img src={comment.profile_url} alt="" />
           {comment.author}
           <CreatedAt>{comment.createdAt}</CreatedAt>
           <Content>{comment.content}</Content>
           <Button>
-            <a>수정</a>
-            <a>삭제</a>
+            <a
+              onClick={() => {
+                setEditMode(true);
+                setEditstate(comment);
+              }}
+            >
+              수정
+            </a>
+            <a onClick={() => onDeletHandler(comment.id)}>삭제</a>
           </Button>
-
           <hr />
         </Comment>
       ))}

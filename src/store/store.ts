@@ -12,7 +12,6 @@ const createStore = () => {
     devTools: process.env.NODE_ENV === 'development',
     middleware: process.env.NODE_ENV === 'production' ? [sagaMiddleware] : [sagaMiddleware, logger],
   });
-
   sagaMiddleware.run(rootSaga);
 
   return store;
