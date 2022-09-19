@@ -40,6 +40,11 @@ const MainPage = () => {
     dispatch({ type: getComments.type, payload: { params } });
   }, [page, limit, order, sort]);
 
+  // order change set page 1
+  useEffect(() => {
+    setPage(1);
+  }, [limit, order, sort]);
+
   // page change
   useEffect(() => {
     navigate(`?page=${page}`);
