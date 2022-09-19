@@ -77,16 +77,16 @@ function* deleteCommentsSaga(action: any) {
 
 // watch
 function* watchAddCommn() {
-  yield takeLatest(addCommnet, addCommentSaga);
+  yield takeLatest(addCommnet.type, addCommentSaga);
 }
 function* watchGetCommn() {
-  yield takeLatest(getComments, getCommentsSaga);
+  yield takeLatest(getComments.type, getCommentsSaga);
 }
 function* watchDeleteCommn() {
-  yield takeLatest(deleteComment, deleteCommentsSaga);
+  yield takeLatest(deleteComment.type, deleteCommentsSaga);
 }
 function* watchUpdateCommn() {
-  yield takeLatest(updateComment, updateCommentsSaga);
+  yield takeLatest(updateComment.type, updateCommentsSaga);
 }
 
 // root

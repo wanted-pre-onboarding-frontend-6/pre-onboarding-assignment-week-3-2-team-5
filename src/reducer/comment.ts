@@ -101,10 +101,8 @@ export const commentReducer = createSlice({
 
     updateCommentSuccess: (state, action) => {
       reducerUtils.success(state.updateComment);
-      const comment = state.comments.find((comment) => comment.id === action.payload.id);
-      if (comment) {
-        comment.content = action.payload.content;
-      }
+      const commentIndex = state.comments.findIndex((comment) => comment.id === action.payload.id);
+      state.comments[commentIndex] = action.payload;
     },
 
     updateCommentFailure: (state, action) => {
