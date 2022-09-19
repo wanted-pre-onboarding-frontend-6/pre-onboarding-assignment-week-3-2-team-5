@@ -7,6 +7,7 @@ import { getComments } from 'reducer/comment';
 import Order from './components/Order';
 import { useNavigate } from 'react-router-dom';
 import CommentList from './components/CommentList';
+import { useInput } from 'hooks/useInput';
 
 const MainPage = () => {
   // edit
@@ -24,9 +25,9 @@ const MainPage = () => {
 
   // page condition state
   const [page, setPage] = useState(queryString.parse(window.location.search).page || 1);
-  const [limit, setLimit] = useState(10);
-  const [sort, setSort] = useState('createdAt');
-  const [order, setOrder] = useState('desc');
+  const [limit, onChangeLimit] = useInput(10);
+  const [sort, onChageSort] = useInput('createdAt');
+  const [order, onChangeOrder] = useInput('desc');
 
   // comment read
   useEffect(() => {
@@ -37,7 +38,7 @@ const MainPage = () => {
       _order: order,
     };
     dispatch({ type: getComments.type, payload: { params } });
-  }, [page, limit, order]);
+  }, [page, limit, order, sort]);
 
   // page change
   useEffect(() => {
@@ -76,9 +77,9 @@ const MainPage = () => {
         limit={limit}
         sort={sort}
         order={order}
-        setLimit={setLimit}
-        setSort={setSort}
-        setOrder={setOrder}
+        onChangeLimit={onChangeLimit}
+        onChageSort={onChageSort}
+        onChangeOrder={onChangeOrder}
       />
       <CommentList setEditstate={setEditstate} setEditMode={setEditMode} />
       <PageList page={page} setPage={setPage} limit={limit} />

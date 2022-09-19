@@ -29,7 +29,7 @@ function PageList({ page, setPage, limit }: any) {
       .catch((err: any) => {
         throw new Error(err);
       });
-  }, [page, comments]);
+  }, [page, limit, comments]);
 
   // onclikc page navigate
   const onPageClickHabdler = useCallback((e: any) => {
