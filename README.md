@@ -1,57 +1,139 @@
-## 목표
+# 댓글 프로젝트
 
--   API 서버와 통신해서 작동하는 댓글 프로젝트를 Redux를 통해 구현
+## 📌 프로젝트 소개
 
-## 참고자료
+### 목표
+API 서버와 통신해서 작동하는 댓글 프로젝트를 Redux를 통해 구현
 
--   API 참고사항
+### 개발 기간
+`2022/09/16 ~ 2022/09/19`
 
-    -   프로젝트내에서 `npm install` 후, `npm run api` 실행 시 `[localhost:4000](http://localhost:4000)` 에 API 서버 실행
-    -   [http://localhost:4000/comments](http://localhost:4000/comments)에 `GET` 요청시 `data.json` 파일에 기록된 데이터 확인 가능
-    -   API 를 통해 입력하거나 수정하면 data.json 파일내용도 변경됨
-    -   총 댓글수는 `/comments` API로 호출 후 응답값을 통해서 직접 계산.
-    -   서버는 json-server 라이브러리 이용해서 구축됨
+<br/>
 
-        -   API 사용법에 대한 추가정보는 공식문서 참고: [https://www.npmjs.com/package/json-server](https://www.npmjs.com/package/json-server)
+## 📌 배포
 
-            | method | url                   |
-            | ------ | --------------------- |
-            | GET    | /comments             |
-            | GET    | /comments/{commentId} |
-            | POST   | /comments             |
-            | PUT    | /comments/{commentId} |
-            | DELETE | /comments/{commentId} |
+https://comments-fe-5.netlify.app/
 
-    -   API 호출 예시:
-        -   한페이지에 4개의 게시물이 보이고, 최근 게시물부터 정렬해서 3페이지를 보고 싶은 경우
-        -   GET `/comments?_page=3&_limit=4&_order=desc&_sort=id`
+<br />
 
-## 과제 범위
+## 📌 프로젝트 설치 및 시작
 
-1. 예시 이미지와 같이 댓글 불러오기, 작성, 수정, 삭제가 동작하도록 기능 구현
+#### 프로젝트 클론
 
-    ![https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif](https://user-images.githubusercontent.com/12206933/83601436-8e15b780-a5ab-11ea-91ad-04a302579c90.gif)
+```shell
+$ git clone https://github.com/wanted-pre-onboarding-frontend-6/pre-onboarding-assignment-week-3-2-team-5.git
+```
 
-2. 페이지네이션
-3. 댓글 작성, 수정, 삭제 후 동작
-    - 댓글 작성하고 난 뒤: 다른 페이지에 위치하고 있었더라도 1페이지로 이동, 입력 폼 초기화
-    - 댓글 수정하고 난 뒤: 현재 보고있는 페이지 유지, 입력 폼 초기화
-    - 삭제하고 난 뒤: 1페이지로 이동
+#### 패키지 설치
 
-## 요구 사항
+```shell
+$ npm install
+```
 
--   Redux 환경설정은 자유롭게 진행
-    -   Redux-saga or Redux-thunk 자유롭게 선택 가능
-    -   미들웨어 사용안하는 것도 가능
--   Redux logger, Redux-Devtools 설정 필수
--   Redux를 이용한 비동기 처리 필수
+#### 서버 실행
 
-## 개발 조건 및 환경
+```shell
+$ npm run api
+$ npm run start
+```
+<br/>
 
--   언어 : JavaScript / TypeScript
--   필수 기술: React, Redux, Redux-Logger, Redux-Devtools
--   선택 기술:
-    -   Redux Middleware
-    -   스타일 관련 라이브러리(styled-components, emotion, ui kit 등)
-    -   HTTP Client(axios 등)
--   위에 기재된 라이브러리 외 사용 불가
+## 📌 팀원 소개
+
+<br/>
+
+<table align="center">
+<tr >
+<td align="center"><a href="https://github.com/LoggingCo"><img  src="https://avatars.githubusercontent.com/LoggingCo" width="100%"  height="50%"/></a></td>
+<td align="center"><a href="https://github.com/sming0112"><img src="https://avatars.githubusercontent.com/sming0112" width="100%"  height="50%"/></a></td>
+<td align="center"><a href="https://github.com/YSBINN"><img src="https://avatars.githubusercontent.com/YSBINN" width="100%" height="50%" /></a></td>
+<td align="center"><a href="https://github.com/Leejha"><img src="https://avatars.githubusercontent.com/Leejha" width="100%"  height="50%"/></a></td>
+<td align="center"><a href="https://github.com/seriparkdev"><img src="https://avatars.githubusercontent.com/seriparkdev" width="100%"  height="50%"/></a></td>
+</tr>
+<tr>
+<td align="center"><b>김성용(팀장)</b></td>
+<td align="center"><b>성민규</b></td>
+<td align="center"><b>임상빈</b></td>
+<td align="center"><b>이재하</b></td>
+<td align="center"><b>박세리</b></td>
+</tr>
+<tr>
+<td align="center"><b>FE Developer</b></td>
+<td align="center"><b>FE Developer</b></td>
+<td align="center"><b>FE Developer</b></td>
+<td align="center"><b>FE Developer</b></td>
+<td align="center"><b>FE Developer</b></td>
+</tr>
+</table>
+
+<br/>
+
+## 📌프로젝트 과정 소개
+
+- [Git 전략](https://github.com/wanted-pre-onboarding-frontend-6/Assign-1/wiki/Git-%EC%A0%84%EB%9E%B5)
+
+- [커밋 컨벤션 및 코딩 컨벤션](https://github.com/wanted-pre-onboarding-frontend-6/Assign-1/wiki/%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98-%EB%B0%8F-%EC%BD%94%EB%94%A9-%EC%BB%A8%EB%B2%A4%EC%85%98)
+
+
+<br/>
+
+## 📌 프로젝트 구조
+
+<details>
+<summary>open</summary>
+
+```
+├─apis
+├─components
+│  ├─Button
+│  ├─Input
+│  └─Select
+├─context
+├─hooks
+├─pages
+│  └─components
+├─reducer
+├─saga
+├─store
+├─types
+│  ├─api
+│  └─style
+└─utils
+```
+
+</details>
+
+<br/>
+
+## 📌기술 스택
+ 
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) 
+![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) 
+![](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"/>
+<img src="https://img.shields.io/badge/Redux--toolkit-764ABC?style=for-the-badge&logo=redux&logoColor=white"/>
+<img src="https://img.shields.io/badge/Redux saga-999999?style=for-the-badge&logo=reduxsaga&logoColor=white"/>
+
+<br/>
+
+## 📌 요구 사항
+- [x] 댓글 불러오기, 작성, 수정, 삭제가 동작하도록 기능 구현
+- [x] 페이지네이션
+- [x] 댓글 작성, 수정, 삭제 후 동작
+    - [x] 댓글 작성하고 난 뒤: 다른 페이지에 위치하고 있었더라도 1페이지로 이동, 입력 폼 초기화
+    - [x] 댓글 수정하고 난 뒤: 현재 보고있는 페이지 유지, 입력 폼 초기화
+    - [x] 삭제하고 난 뒤: 1페이지로 이동
+- [x] Redux logger, Redux-Devtools 설정 필수
+- [x] Redux를 이용한 비동기 처리 필수
+
+<br/>
+
+## 📌 Best Practice
+
+### 💡redux-toolkit을 사용했습니다.
+redux를 사용할 때면 프로젝트가 크지 않음에도 복잡한 코드를 작성해야 합니다. store를 설정해주는 과정이 복잡하고, redux를 좀 더 편하게 사용하기 위해서는 패키지를 많이 설치해야하며, boilerplate 코드가 비효율적으로 깁니다. 그렇기 때문에 이번 프로젝트에서 redux를 효율적으로 관리하기 위해서 redux-toolkit을 사용했습니다.
+
+redux-toolkit의 `createSlice`는 자동적으로 immer를 내부적으로 사용하기 때문에 불변성을 편리하게 관리할 수 있고 reducer를 더 쉽고 간단하게 작성할 수 있습니다.
+
+### 💡redux-thunk 대신 redux-saga를 사용했습니다.
+redux-thunk를 사용할 때 고차함수 작성 등 코드 복잡도가 더 높다고 느껴지기 때문에 redux-saga를 선택하게 되었습니다. 그리고 api 작업 실패 시 재요청, 발생한 액션에 따라서 원하는 액션 디스패치 등 saga로는 thunk보다 비동기처리를 다양하게 처리할 수도 있습니다.
