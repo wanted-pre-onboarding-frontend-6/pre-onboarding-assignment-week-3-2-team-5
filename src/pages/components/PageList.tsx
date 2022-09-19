@@ -23,7 +23,6 @@ function PageList({ page, setPage, limit }: any) {
         const totalPageList = Array(totalPageCount)
           .fill(totalPageCount)
           .map((v, index) => ({ page: index + 1, active: false }));
-
         pageActiveUtils(parseInt(page), totalPageList);
         setPageList(totalPageList);
       })
