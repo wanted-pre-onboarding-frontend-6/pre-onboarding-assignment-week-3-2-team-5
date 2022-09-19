@@ -1,44 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { commentApi } from 'api/baseApi';
-
-interface InitialState {
-  comments: Comment[];
-  isLoading: boolean;
-  error: string | undefined;
-}
+import { CommentsInitial } from 'types/comment';
 
 export const getComments = createAsyncThunk('comments/getComments', async () => {
   try {
-    const response = await commentApi.get('/comments');
+    const response = await commentApi.get('/comments?_page=1&_limit=4&_order=desc&_sort=id');
     return response.data;
   } catch (error) {
     console.log(error);
   }
 });
 
-const initialState: InitialState = {
+const initialState: CommentsInitial = {
   comments: [],
-  isLoading: false,
-  error: '',
 };
 
-export const commentSlice = createSlice({
+export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getComments.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getComments.fulfilled, (state, action) => {
-      state.isLoading = false;
+  extraReducers: {
+    [getComments.fulfilled.type]: (state, action) => {
       state.comments = action.payload;
-    });
-    builder.addCase(getComments.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error.message;
-    });
+    },
   },
 });
 
-export default commentSlice.reducer;
+export default commentsSlice.reducer;
