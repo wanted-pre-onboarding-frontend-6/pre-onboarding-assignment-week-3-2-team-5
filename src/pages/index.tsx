@@ -10,7 +10,6 @@ import CommentList from './components/CommentList';
 import { useInput } from 'hooks/useInput';
 
 const MainPage = () => {
-  // edit
   const [editMode, setEditMode] = useState(false);
   const [editState, setEditstate] = useState(null);
 
